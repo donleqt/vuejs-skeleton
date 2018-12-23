@@ -1,0 +1,39 @@
+// custome bootstrap
+$grid-gutter-width: 20px;
+
+// ==========================================================================
+// Colors
+// ==========================================================================
+// themes
+$color-main: #0076dc;
+$color-sub: #5ac546;
+
+$border-radius: 2px;
+
+// Theme color
+$white: #fff;
+
+// font weight
+$semibold: 600;
+$bold: 800;
+
+// z index
+$z-index-header: 1010;
+$z-index-loading: 1000;
+$z-index-toast: 1100;
+
+// End theme color
+// ==========================================================================
+
+// ==========================================================================
+// Breakpoints
+// used by the mixin 
+// @inlcude breakpoint($mobile-to-tablet) {}
+// @inlcude breakpoint($desktop) {}
+// @inlcude breakpoint($tablet) {} less used, only fix for tablet devices
+// ==========================================================================
+$mobile-to-tablet: 'lg';
+$mobile: 'sm';
+$tabletUp: 'md-up';
+$tablet: 'tablet';
+$desktop: 'hlg-up';

@@ -1,0 +1,8 @@
+.container.sitemap-page
+  h2.text-center App Sitemap
+  .row
+    .col-lg-2
+    .col-lg-10
+      ol
+        li(v-for="{name, link} in routePaths")
+          router-link(:to="link") {{name}}

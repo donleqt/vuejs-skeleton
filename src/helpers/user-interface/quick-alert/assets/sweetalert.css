@@ -1,0 +1,55 @@
+
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown), html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow: auto
+}
+
+@media screen\0 {
+    body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown), html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+        overflow: visible
+    }
+}
+
+.swal2-popup {
+    border-radius: 4px;
+    padding: 2.5rem 2.5rem 3rem;
+}
+
+.swal2-popup .swal2-title {
+    font-weight: 100;
+    font-size: 1.3rem;
+    margin: 5px 0 1rem
+}
+
+.swal2-popup .swal2-content {
+    font-weight: 300;
+    font-size: 1rem
+}
+
+.swal2-popup .btn {
+    margin: 15px 5px 0
+}
+
+.swal2-popup .swal2-styled:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.swal2-container.swal2-shown {
+    background-color: rgba(0, 0, 0, .2)
+}
+
+.swal2-popup .swal2-title {
+    color: #575962
+}
+
+.swal2-popup .swal2-content {
+    color: #6f727d
+}
+
+.swal2-popup .swal2-actions {
+    margin-top: 5px;
+}
+
+.swal2-icon {
+    font-size: 13px;
+}

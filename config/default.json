@@ -1,0 +1,10 @@
+{
+  "name": "donlq-vue",
+  "indexFile": "app.html",
+  "vueApp": {
+    "pageSize": 10,
+    "facebook": {
+      "appId": "001200"
+    }
+  }
+}

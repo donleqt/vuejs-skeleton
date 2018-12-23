@@ -1,0 +1,13 @@
+.base-modal(to="portal")
+  transition(name='modal')
+    .modal__mask(v-show="showModal")
+      .modal__wrapper
+        .modal__container(:style="width ? {width: `${width}px`} : null")
+          .modal__header
+            a.modal__close-btn(v-if="canClose" href="javascript:void(0)", @click.prevent="close") ✕
+            slot(name='header')
+          .modal__body
+            slot
+              | default body
+          .modal__footer
+            slot(name='footer')

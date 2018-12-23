@@ -1,0 +1,72 @@
+{
+  "name": "donlq-vuejs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    #### Start local development
+    "start": "vue-cli-service serve",
+    #### Build app with default development env
+    "build": "vue-cli-service build && webpack --config ./webpack/webpack.server.config.js",
+    #### Start node server
+    "server": "nodemon ./src/server/index.js",
+    #### Start node server via pm2
+    "server:pm2": "pm2 start process.json",
+    #### Build App production
+    "build:prod": "ENV=production yarn build",
+    #### Build App server-debug
+    "build:debug": "ENV=server-debug yarn build",
+    #### Start NodeServer production
+    "server:prod": "ENV=production NODE_ENV=production yarn server:pm2",
+    #### Start NodeServer debug
+    "server:debug": "ENV=server-debug yarn server:pm2",
+    "test:dist": "cd dist && ws -z --spa app.html --rewrite '/*.html -> /app.html'",
+    "tool:lint": "vue-cli-service lint",
+    "tool:inspect": "vue inspect > output.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "lru-cache": "^4.1.3",
+    "nanobar": "^0.4.2",
+    "nodemon": "^1.18.4",
+    "null-loader": "^0.1.1",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "sweetalert2": "^7.33.1",
+    "tippy.js": "^3.3.0",
+    "toastr": "^2.1.4",
+    "universal-cookie": "^3.0.4",
+    "vue": "^2.5.17",
+    "vue-i18n": "^8.4.0",
+    "vue-lazyload": "^1.2.6",
+    "vue-meta": "^1.5.8",
+    "vue-router": "^3.0.1",
+    "vue-select": "^2.5.1",
+    "vue-server-renderer": "^2.5.17",
+    "vue2-siema": "^0.2.2",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0",
+    "webpack": "^4.27.1",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2",
+    "yup": "^0.26.6",
+    "wingcss": "^1.0.0-beta"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/eslint-config-airbnb": "^3.0.5",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2"
+  }
+}

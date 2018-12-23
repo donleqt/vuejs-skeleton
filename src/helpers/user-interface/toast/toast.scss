@@ -1,0 +1,87 @@
+/* 
+<div id="toast-container" class="toast-bottom-right"><div class="toast toast-info" aria-live="polite" style=""><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">Info message</div><div class="toast-message">kskksks</div></div></div>
+*/
+
+@import '~@/modules/shared//scss/base/base';
+
+@mixin deep() {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+#toast-container {
+  position: fixed;
+  z-index: $z-index-toast;
+
+  .toast {
+    position: relative;
+    width: 340px;
+    margin: 0 10px 25px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    opacity: 0.95;
+    cursor: pointer;
+    @include deep();
+    transition: transform 0.3s;
+    &:hover {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2),
+        0 1px 5px 0 rgba(0, 0, 0, 0.15), 0 3px 1px -2px rgba(0, 0, 0, 0.4);
+    }
+    .toast-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .toast-message {
+      color: #262124;
+      font-size: 14px;
+    }
+    .toast-close-button {
+      position: absolute;
+      color: #000;
+      z-index: 1;
+      right: 10px;
+      top: 5px;
+    }
+  }
+  @include breakpoint($min: 768px) {
+    .toast {
+      &:hover {
+        transform: translateY(-10px);
+      }
+    }
+  }
+  @include breakpoint($max: 767px) {
+    right: 50% !important;
+    transform: translateX(50%);
+    top: 25px !important;
+  }
+
+  @include breakpoint($min: 0, $max: 340px) {
+    .toast {
+      width: 300px;
+    }
+  }
+
+  .toast {
+    padding-left: 65px;
+    background-size: 35px;
+    &.toast-info {
+      // color: #22b6e1;
+      background-image: url('~@/helpers/user-interface/toast/info.svg') !important;
+    }
+    &.toast-warning  {
+      // color: #e1da22;
+      background-image: url('~@/helpers/user-interface/toast/warning.svg') !important;
+    }
+    &.toast-error  {
+      // color: #df3f3f;
+      background-image: url('~@/helpers/user-interface/toast/error.svg') !important;
+    }
+    &.toast-success  {
+      // color: #30d353;
+      background-image: url('~@/helpers/user-interface/toast/success.svg') !important;
+    }
+  }
+}

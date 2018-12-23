@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "name": "vue",
+      "script": "./src/server/index.js",
+      "watch": false,
+      "exec_mode": "cluster",
+      "instances": 1,
+      "max_memory_restart": "800M"
+    }
+  ]
+}

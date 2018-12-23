@@ -1,0 +1,77 @@
+@import './mixins';
+
+// ui mixins
+@mixin drop-shadow {
+  filter: drop-shadow(0px 3px 8px rgba(0, 0, 0, 0.4));
+}
+
+@mixin hover() {
+  @include breakpoint($desktop) {
+    &.active,
+    &:active,
+    &:hover {
+      @content;
+    }
+  }
+  @include breakpoint($mobile-to-tablet) {
+    &.active,
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin default() {
+  &:not(:hover) {
+    @content;
+  }
+
+  @include breakpoint($mobile-to-tablet) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Responsive by devices
+@mixin mobile-small() {
+  @include breakpoint($max: 360px) {
+    @content;
+  }
+}
+
+@mixin mobile() {
+  @include breakpoint($max: 767px) {
+    @content;
+  }
+}
+
+@mixin mobile-to-tablet() {
+  @include breakpoint($max: 1999px) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @include breakpoint($min: 768px, $max: 1999px) {
+    @content;
+  }
+}
+
+@mixin tablet-up() {
+  @include breakpoint($min: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @include breakpoint($min: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktop-small() {
+  @include breakpoint($min: 1200px, $max: 1366px) {
+    @content;
+  }
+}

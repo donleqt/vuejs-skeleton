@@ -1,0 +1,12 @@
+.base-rating(:class="{votable: !!votable}")
+  a.rating-star(href="javascript:void(0);", 
+  v-for="(item, index) in starArray",
+  :key="index"
+  :class="{'active': isActive(index)}",
+  @mouseover="hovering = index + 1"
+  @mouseleave="hovering = -1"
+  @click="onStarClick(index + 1)"
+  )
+    svg.star.rating
+      polygon(points='9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78' style='fill-rule:nonzero;')
+  span.rating-count ({{count}})

@@ -1,0 +1,9 @@
+@import "variables";
+
+@mixin rootColor {
+  :root {
+    --primary: #{$color-main};
+    --secondary: #{$color-main};
+    --secondary-light: #{rgba($color-main, 0.8)};
+  }
+}

@@ -1,0 +1,107 @@
+@import './base/base';
+// =================================
+// GRID
+// =================================
+
+* {
+  box-sizing: border-box;
+}
+
+$grid-columns: 12;
+$part: (100% / $grid-columns);
+$container-width: 1100px;
+$gutter-width: 18px;
+$breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+  // xl: 1367px,,,
+);
+
+// .container is main centered wrapper with a max width of 112.0rem (1120px)
+.container {
+  margin: 0 auto;
+  max-width: $container-width;
+  padding: 0 $gutter-width;
+  position: relative;
+  width: auto;
+}
+
+// Using flexbox for the grid, inspired by Philip Walton:
+// http://philipwalton.github.io/solved-by-flexbox/demos/grids/
+// By default each .column within a .row will evenly take up
+// available width, and the height of each .column with take
+// up the height of the tallest .column in the same .row
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+
+  &.row-no-padding {
+    padding: 0;
+
+    & > .column {
+      padding: 0;
+    }
+  }
+}
+
+.container {
+  max-width: 1100px;
+}
+
+.row {
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: -$gutter-width/2;
+  margin-right: -$gutter-width/2;
+
+  > [class^='col-'],
+  > [class*=' col-'] {
+    display: block;
+    flex: 1 1 auto;
+    margin-left: 0;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: inherit;
+    padding: 0 $gutter-width/2;
+  }
+
+  @mixin content($i, $html) {
+    #{$html} &-#{$i} {
+      max-width: ($i * $part);
+    }
+  }
+
+  @for $i from 0 through $grid-columns {
+    .col {
+      @if $i == 0 {
+        max-width: 100%;
+      } @else {
+        @include content($i, '');
+      }
+    }
+  }
+
+  @each $key, $value in $breakpoints {
+    $index: index(
+      $list: $breakpoints,
+      $value: (
+        $key $value,
+      ),
+    );
+
+    @include breakpoint($min: $value) {
+      .col-#{$key} {
+        @for $i from 0 through $grid-columns {
+          @if $i == 0 {
+            max-width: 100%;
+          } @else {
+            @include content($i, '');
+          }
+        }
+      }      
+    }
+  }
+}

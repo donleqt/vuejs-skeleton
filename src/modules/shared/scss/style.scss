@@ -1,0 +1,18 @@
+//==========================================================================
+// STYLE FOR DEV. Just import some parts
+// ==========================================================================
+// External css libraries
+@import 'lib.scss';
+@import 'base/base.scss';
+
+// generals
+@import 'components/generals/grid.scss';
+@import 'components/generals/text.scss';
+@import 'components/generals/link.scss';
+@import 'components/generals/buttons.scss';
+@import 'components/generals/table.scss';
+@import 'components/generals/form.scss';
+// @import 'components/cards.scss';
+
+// global
+@import 'pages/all-pages/global.scss';
