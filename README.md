@@ -43,12 +43,12 @@ Now you have json config file: `./config/production.json`
 
 Build source code, client then server
 ```
-$ yarn build && yarn build:server
+$ yarn build:prod
 ```
 
 Start NodeJS server to serve request
 ```
-$ pm2 start process.json
+$ yarn start:prod
 ```
 Note: The server must have pm2 (sudo npm install -g pm2)
 
