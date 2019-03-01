@@ -4,7 +4,8 @@ const childProcess = require('child_process');
 
 const mode = config.build.mode;
 const watchSSR = config.build.watchSSR ? '--w' : '';
-const clientCmd = `NODE_ENV=${mode} npx vue-cli-service build --mode ${mode}`;
+const analyse = config.build.analyse ? '--analyse' : '';
+const clientCmd = `NODE_ENV=${mode} npx vue-cli-service build --mode ${mode} ${analyse}`;
 const serverCmd = `NODE_ENV=${mode} npx webpack --config webpack/webpack.server.config.js ${watchSSR}`;
 
 // ==== BUILD client side app

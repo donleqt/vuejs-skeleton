@@ -21,7 +21,9 @@ function validateAndBuildBundle() {
 function getBundleParts() {
   const serverBundle = JSON.parse(fs.readFileSync(files.serverJson).toString('utf-8'));
   const clientManifest = JSON.parse(fs.readFileSync(files.clientJson.toString('utf-8')));
-  const template = fs.readFileSync(files.templateHtml).toString('utf-8');
+  let template = fs.readFileSync(files.templateHtml).toString('utf-8');
+  template = template.replace(/\[ssr]-->/ig, '').replace(/<!--\[ssr]/ig, '');
+  template = template.replace(/<!--\[browser]-->[\S\s]+?<!--\[\/browser]-->/igm, '');
   return {
     serverBundle,
     clientManifest,

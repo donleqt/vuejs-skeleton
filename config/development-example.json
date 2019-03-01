@@ -13,13 +13,14 @@
     "mode": "production",
     "skipSSR": false,
     "watchSSR": false,
+    "analyse": false,
     "outputDir": "dist"
   },
   "vueApp": {
     "publicPath": "/",
     "baseUrl": "/",
     "api": {
-      "browserEndPoint": "http://lunaestellar.docker.elidev.info/api/v1",
+      "browserEndPoint": "http://api.production.info/api/v1",
       "nodeEndPoint": "http://localhost:3001/api/v1"
     }
   }

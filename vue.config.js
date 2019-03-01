@@ -31,7 +31,7 @@ module.exports = {
 
     webpackConfig.plugin('html').tap((opts) => {
       opts[0].filename = config.indexFile;
-      opts[0].template = 'public/app.html';
+      opts[0].template = 'src/templates/index.html';
       return opts;
     });
 

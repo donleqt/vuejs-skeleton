@@ -1,4 +1,4 @@
-# lunaestella-vuejs
+# skeleton-vuejs
 
 ### Installation for development
 
@@ -67,6 +67,3 @@ yarn run lint
 ### Useful info
 - If fail at `yarn install`, please clone `yarn.lock.example` to `yarn.lock` then try again.
 - Setup eslint for your phpstorm: https://stackoverflow.com/questions/41735890/how-to-make-webstorm-format-code-according-to-eslint/42962953
-
-### Solved errors
-- `Cannot assign to read only property 'exports' of object '#<Object>'` that I can't put `module.exports` in the `config.js` file. Solved by add an babel plugin: https://www.npmjs.com/package/babel-plugin-add-module-exports

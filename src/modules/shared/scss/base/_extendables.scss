@@ -33,6 +33,21 @@
   }
 }
 
+@mixin absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-fit() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
 // Responsive by devices
 @mixin mobile-small() {
   @include breakpoint($max: 360px) {

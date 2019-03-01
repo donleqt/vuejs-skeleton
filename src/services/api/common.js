@@ -25,7 +25,7 @@ export class CommonApiService extends RestApiAbstract {
 
     if (resp.data.seo) {
       data.seo = {
-        templateTitle: resp.data.seo.template_title || 'Lunaestella - %s',
+        templateTitle: resp.data.seo.template_title || 'Vue - %s',
         meta: resp.data.meta,
       };
     }

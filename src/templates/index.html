@@ -6,16 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <!-- use triple mustache for non-HTML-escaped interpolation -->
-  {{{ meta.inject().title.text() }}}
-  {{{ meta.inject().meta.text() }}}
-  {{{ meta.inject().link.text() }}}
-  <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/favicons/android-chrome-192x192.png" sizes="192x192">
+   <!--[ssr]
+    {{{ meta.inject().title.text() }}}
+    {{{ meta.inject().meta.text() }}}
+    {{{ meta.inject().link.text() }}}
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicons/android-chrome-192x192.png" sizes="192x192">
+  [ssr]-->
+  <!--[browser]-->
+  <link rel="icon" type="image/png" href="<%= BASE_URL %>assets/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="<%= BASE_URL %>assets/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="<%= BASE_URL %>assets/favicons/android-chrome-192x192.png" sizes="192x192">
+  <!--[/browser]-->
 </head>
 
 <body>
+  <noscript>
+    <strong>We're sorry but this website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
   <!--vue-ssr-outlet-->
-  <script>window.__ASYNC_DATA__ = {{{ JSON.stringify(asyncData || {}) }}};</script>
+  <!--[ssr]<script>window.__ASYNC_DATA__ = {{{ JSON.stringify(asyncData) }}};</script>[ssr]-->
 </body>
 </html>
