@@ -50,6 +50,21 @@ export function justTry(func) {
   }
 }
 
+
+export function isScrollPassed(element, offset = 0) {
+  const elementPosition = $(element).offset().top;
+  const scrollPosition = window.scrollY + offset;
+  return scrollPosition > elementPosition;
+}
+
+export function isInView(element) {
+  var elementTop = $(element).offset().top;
+  var elementBottom = elementTop + $(element).outerHeight();
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+  return elementBottom > viewportTop && elementTop < viewportBottom;
+}
+
 /**
  * time as seconds
  * @param time

@@ -1,5 +1,18 @@
 import NotFound from '@/modules/shared/views/NotFound';
 import utils from '@/helpers/utils';
+
+function fixHref(router) {
+  if (global.isClient) {
+    $(document).on('click', 'a', (event) => {
+      const url = event.currentTarget.href;
+      if (!utils.isExternalLink(url, location.href)) {
+        event.preventDefault();
+        router.push(url.replace(/https?:\/\/([\w:.-]+)(\/|$)/i, '/'));
+      }
+    });
+  }
+}
+
 // patch the router so that is can inject http code
 export default function patchRouter(router) {
   router.res = (code, error) => {
@@ -30,4 +43,6 @@ export default function patchRouter(router) {
       router.push(path);
     }
   };
+
+  fixHref(router);
 }

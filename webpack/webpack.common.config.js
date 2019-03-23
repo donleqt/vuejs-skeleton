@@ -35,10 +35,10 @@ module.exports = {
     extensions: ['.js', '.json'],
   },
   plugins: [
-    // new webpack.ProvidePlugin({
-    //   $: 'jquery',
-    //   jQuery: 'jquery',
-    // }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
     new webpack.DefinePlugin({
       'process.env.ENV': JSON.stringify(config.env),
       'process.env.NODE_ENV': JSON.stringify(mode),

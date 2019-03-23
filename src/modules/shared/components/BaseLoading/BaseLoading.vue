@@ -12,7 +12,7 @@ export default {
   props: {
     loading: false,
     dark: false,
-    overlay: true,
+    overlay: false,
   },
 };
 </script>
@@ -23,7 +23,7 @@ export default {
   .loading-wrapper {
     padding: 0.1px;
     $this: &;
-    $size: 35px;
+    $size: 30px;
     $over: 0px;
 
     min-height: 40px;

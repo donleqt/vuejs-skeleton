@@ -1,6 +1,6 @@
 <template>
   <div class="global-wrapper">
-    <base-loading :loading="loading">
+    <base-loading class="global-loading" :loading="loading">
       <slot v-if="isReady">
       </slot>
     </base-loading>
@@ -44,7 +44,7 @@ export default {
 </script>
 <style lang="scss">
   .global-wrapper {
-    .base-loading.is-loading {
+    .global-loading.is-loading {
       padding: 0.1px 0;
       height: 100vh;
       overflow: hidden;

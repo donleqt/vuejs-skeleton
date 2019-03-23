@@ -9,7 +9,7 @@ export default class AbstractVueModule {
     const {
       basePath, router, store, app,
     } = context;
-    this.context = context;
+    this.$context = context;
   }
 
   register() {
@@ -37,12 +37,12 @@ export default class AbstractVueModule {
       e.meta.wrapper = ModuleWrapper;
     });
 
-    this.context.router.addRoutes(flattedRoutes);
+    this.$context.router.addRoutes(flattedRoutes);
     this.registerStore();
   }
 
   registerStore() {
-    const { store } = this.context;
+    const { store } = this.$context;
     const { moduleStore } = this;
     if (store && moduleStore) {
       const listStores = Array.isArray(moduleStore) ? moduleStore : [moduleStore];

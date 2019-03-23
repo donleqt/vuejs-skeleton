@@ -16,4 +16,4 @@ String.prototype.toCapitalize = function toCapitalize() {
 };
 
 // import theme feature
-import './theme-feature';
+require('./theme-feature');

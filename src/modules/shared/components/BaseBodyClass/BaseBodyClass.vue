@@ -4,7 +4,7 @@ export default {
   props: ['className'],
   data() {
     return {
-      attachedClass: [],
+      attachedClass: null,
     };
   },
   render(h) {
@@ -14,7 +14,7 @@ export default {
     this.attachClass();
   },
   beforeDestroy() {
-    $(document.body).removeClass(this.attachedClass);
+    this.removeClass();
   },
   watch: {
     className(newVal, oldVal) { // watch it
@@ -22,20 +22,19 @@ export default {
     },
   },
   methods: {
-    attachClass() {
-      const $body = $(document.body);
-      $body.removeClass(this.attachedClass);
-      this.attachedClass = [];
-      if (typeof this.className === 'string') {
-        this.attachedClass = [this.className];
-      } else {
-        Object.entries(this.className).forEach(([key, val]) => {
-          if (val) {
-            this.attachedClass.push(key);
-          }
+    removeClass() {
+      if (this.attachedClass) {
+        this.attachedClass.split(' ').forEach((e) => {
+          document.body.classList.remove(e);
         });
       }
-      $body.addClass(this.attachedClass);
+    },
+    attachClass() {
+      this.removeClass();
+      if (typeof this.className === 'string') {
+        this.attachedClass = this.className;
+        this.attachedClass.split(' ').forEach(e => document.body.classList.add(e));
+      }
     },
   },
 };
