@@ -1,16 +1,8 @@
 /* eslint-disable */
 
-export const checkSamePasswords = x => x.password === x.password_confirmation;
-
 export const isEmail = s =>
   /^(([^<>()[\]\\.,;:`~#$%^&*+=!\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(s);
-
-export function ifClass(condition, className) {
-  return condition ? className : '';
-}
-
-export const convertToArray = data => Object.entries(data).map(([, v]) => v);
-
+  
 export const objectMap = (object, callback) => Object.entries(object).map(([key, v], idz) => callback(v, key, idz));
 
 export function removeFromArray(array, comparer) {
@@ -64,30 +56,6 @@ export function isInView(element) {
   var viewportBottom = viewportTop + $(window).height();
   return elementBottom > viewportTop && elementTop < viewportBottom;
 }
-
-/**
- * time as seconds
- * @param time
- * @returns {string}
- */
-export const formatDuration = (time) => {
-  const duration = time ? parseInt(time) : 0;
-  let hours = Math.floor(duration / 3600);
-  let minutes = Math.floor((duration - hours * 3600) / 60);
-  let seconds = (duration - hours * 3600 - minutes * 60).toFixed(0);
-
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  if (seconds < 10) {
-    seconds = `0${seconds}`;
-  }
-
-  return `${hours}:${minutes}:${seconds}`;
-};
 
 export const isInteger = s => /^[0-9]*[1-9]+$|^[1-9]+[0-9]*$/.test(s);
 

@@ -47,3 +47,27 @@ export function addDays(date, nDays) {
 export function addHours(date, nHours) {
   return date.setTime(date.getTime() + (nHours*60*60*1000)); 
 }
+
+/**
+ * time as seconds
+ * @param time
+ * @returns {string}
+ */
+export const formatDuration = (time) => {
+  const duration = time ? parseInt(time) : 0;
+  let hours = Math.floor(duration / 3600);
+  let minutes = Math.floor((duration - hours * 3600) / 60);
+  let seconds = (duration - hours * 3600 - minutes * 60).toFixed(0);
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${hours}:${minutes}:${seconds}`;
+};
