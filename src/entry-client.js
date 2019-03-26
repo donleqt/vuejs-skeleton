@@ -9,9 +9,7 @@ if (!document.querySelector('#app')) {
   document.body.append(div);
 }
 
-// on router ready, mount the app
-router.onReady(async () => {
-  // if the app has not bootstraped yet
+const bootstrap = (async () => {
   if (!app.isBootstraped) {
     nanobar.go(60);
     // run app bootstrap first
@@ -19,5 +17,11 @@ router.onReady(async () => {
     app.isBootstraped = true;
     nanobar.go(100);
   }
+})();
+
+// on router ready, mount the app
+router.onReady(async () => {
+  // if the app has not bootstraped yet
+  await bootstrap;
   app.$mount('#app');
 });
