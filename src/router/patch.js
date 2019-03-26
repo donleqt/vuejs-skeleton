@@ -22,7 +22,7 @@ export default function patchRouter(router) {
       meta.wrapper = NotFound;
 
       if (error) {
-        console.error({ ...error });
+        console.error(error);
       }
 
       if (global.isClient) {

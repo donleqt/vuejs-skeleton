@@ -26,7 +26,11 @@ export default function createStore() {
     actions: {},
   });
 
-  store.bootstrap = () => (!store.state.global.websiteConfig.data ? store.dispatch('global/getWebsiteConfig').catch(console.error) : Promise.resolve(true));
-
+  store.bootstrap = () => {
+    if (!store.state.global.websiteConfig.data) {
+      return store.dispatch('global/getWebsiteConfig').catch(console.error);
+    }
+    return Promise.resolve(true);
+  };
   return store;
 }
