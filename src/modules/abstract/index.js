@@ -1,4 +1,5 @@
 import { flatRoutes } from '@/helpers/vue/route-helper';
+import { removeFromArray } from '@/helpers/utils';
 
 export default class AbstractVueModule {
   routes = {};
@@ -6,31 +7,28 @@ export default class AbstractVueModule {
   wrapper = {};
 
   constructor(context) {
-    const {
-      basePath, router, store, app,
-    } = context;
-    this.$context = context;
+    this.$context = window.context = context;
   }
 
   register() {
     const flattedRoutes = flatRoutes(this.routes);
-    const { wrapper } = this;
+    const $this = this;
     this.onRegister();
-    let ModuleWrapper = {
-      name: 'ModuleWrapper',
-      beforeMount: this.onEnter,
-      beforeDestroy: this.onExit,
+    const ModuleWrapper = {
+      name: `${this.moduleName}ModuleWrapper`,
+      beforeCreate: () => {
+        this.$context.modules.push(this);
+        this.onEnter();
+      },
+      beforeDestroy: () => {
+        removeFromArray(this.$context.modules, e => e === this);
+        this.onExit();
+      },
       render(h) {
-        return <div>{this.$slots.default}</div>;
+        const wrapper = $this.wrapper || 'div';
+        return <wrapper>{this.$slots.default}</wrapper>;
       },
     };
-
-    if (wrapper) {
-      wrapper.mixins = wrapper.mixins || [];
-      wrapper.mixins = wrapper.mixins.filter(e => e.name !== 'ModuleWrapper');
-      wrapper.mixins.push(ModuleWrapper);
-      ModuleWrapper = wrapper;
-    }
 
     flattedRoutes.forEach((e) => {
       e.path = `${this.basePath}${e.path}`;

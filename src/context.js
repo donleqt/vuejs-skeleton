@@ -12,6 +12,10 @@ export function createContext() {
     apiServices: {
       common: new CommonApiService({ apiCaller }),
     },
+    modules: [],
+    get currentModule() {
+      return this.modules.length && this.modules[this.modules.length - 1];
+    },
   };
   return context;
 }
