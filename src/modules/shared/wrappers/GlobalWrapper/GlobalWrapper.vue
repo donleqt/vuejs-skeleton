@@ -1,6 +1,9 @@
 <template>
   <div class="global-wrapper">
-    <base-loading class="global-loading" :loading="loading">
+    <base-loading
+      class="global-loading"
+      :loading="loading"
+    >
       <slot v-if="isReady">
       </slot>
     </base-loading>
@@ -20,13 +23,12 @@
 <script>
 
 import globalStore from '@/store/global';
-import { useStores } from '@/helpers/vue/store-mapper';
 
 export default {
   name: 'GlobalWrapper',
-  mixins: [useStores({
+  useStores: {
     global: globalStore,
-  })],
+  },
   data() {
     return {
       loading: false,
@@ -48,6 +50,9 @@ export default {
       padding: 0.1px 0;
       height: 100vh;
       overflow: hidden;
+    }
+    .page-loading {
+      min-height: 80vh;
     }
   }
 </style>
