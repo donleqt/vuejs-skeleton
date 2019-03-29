@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { globalStoreMixin } from '@/helpers/vue/store-mapper';
+import StoreMapper from '@/helpers/vue/store-mapper';
 import global from './global';
 
 Vue.use(Vuex);
-globalStoreMixin(Vue);
+Vue.use(StoreMapper);
 
 export default function createStore() {
   /* eslint-disable */

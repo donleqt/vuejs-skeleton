@@ -13,10 +13,10 @@ export default class MainAppModule extends AbstractVueModule {
   wrapper = AppWrapper;
 
   onEnter = () => {
-    document.querySelector('html').classList.add(this.moduleName);
+
   };
 
   onExit = () => {
-    document.querySelector('html').classList.add(this.moduleName);
+
   };
 }

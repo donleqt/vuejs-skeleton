@@ -7,7 +7,7 @@ export default class AbstractVueModule {
   wrapper = {};
 
   constructor(context) {
-    this.$context = window.context = context;
+    this.$context = context;
   }
 
   register() {

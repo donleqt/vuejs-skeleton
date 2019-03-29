@@ -63,21 +63,29 @@ export function useStores(params) {
   };
 }
 
-export function globalStoreMixin(Vue) {
-  Vue.mixin({
-    beforeCreate() {
-      if (this.$options.useStores && this.$store) {
-        const stores = {};
-        Object.entries(this.$options.useStores).forEach(([name, storeModule]) => {
-          console.log(this);
-          const mapper = createStoreMapper(storeModule, this.$store);
-          Object.keys(mapper.actions).forEach(key => (mapper.actions[key] = mapper.actions[key].bind(this)));
-          Object.keys(mapper.getters).forEach(key => (mapper.getters[key] = mapper.getters[key].bind(this)));
-          mapper.state = mapper.state.bind(this);
-          stores[name] = mapper;
-        });
-        this.stores = stores;
-      }
-    },
-  });
-}
+const StoreMapper = {
+  install(Vue, options) {
+    if (global.isServer) {
+      // fix vue inspect
+      Vue.prototype.inspect = () => {};
+    }
+
+    Vue.mixin({
+      beforeCreate() {
+        if (this.$options.useStores && this.$store) {
+          const stores = {};
+          Object.entries(this.$options.useStores).forEach(([name, storeModule]) => {
+            const mapper = createStoreMapper(storeModule, this.$store);
+            Object.keys(mapper.actions).forEach(key => (mapper.actions[key] = mapper.actions[key].bind(this)));
+            Object.keys(mapper.getters).forEach(key => (mapper.getters[key] = mapper.getters[key].bind(this)));
+            mapper.state = mapper.state.bind(this);
+            stores[name] = mapper;
+          });
+          this.stores = stores;
+        }
+      },
+    });
+  },
+};
+
+export default StoreMapper;
