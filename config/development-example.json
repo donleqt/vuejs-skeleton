@@ -11,10 +11,11 @@
   },
   "build": {
     "mode": "production",
+    "analyse": false,
     "skipSSR": false,
     "watchSSR": false,
-    "analyse": false,
-    "outputDir": "dist"
+    "outputDir": "dist",
+    "outputSSR": "dist-ssr"
   },
   "vueApp": {
     "publicPath": "/",

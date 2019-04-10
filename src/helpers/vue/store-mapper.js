@@ -1,4 +1,17 @@
-import { mapActions } from 'vuex';
+import { mapActions, Store } from 'vuex';
+
+/**
+ * Check registered module
+ * @param {Array} aPath - path to module - ex: ['my', 'nested', 'module']
+ * @return {Boolean}
+ */
+Store.prototype.hasModule = function (aPath) {
+  let m = this._modules.root;
+  return aPath.every((p) => {
+    m = m._children[p];
+    return m;
+  });
+};
 
 function findState(globalState, paths) {
   let moduleState = globalState;
@@ -11,11 +24,12 @@ function createStoreMapper(storeModule, $store) {
   const paths = `${path}/${storeModule.name}`.split('/').filter(e => e !== '');
 
   // register module store if not registed
-  if (!findState($store.state, paths)) {
+  if (!$store.hasModule(paths)) {
     $store.registerModule(paths, storeModule, {
       preserveState: false,
     });
   }
+
   const mapperActions = {};
   if (storeModule.actions) {
     Object.keys(storeModule.actions).forEach(key => (mapperActions[key] = key));

@@ -5,8 +5,10 @@ const log = require('../../helpers/logger');
 const config = require('../../../config');
 
 const srcDir = path.join(config.projectRoot, 'src');
+const ssrBuiltPath = config.build.outputSSR ? `${config.projectRoot}/${config.build.outputSSR}` : config.vueAppPath;
+
 const files = {
-  serverJson: path.resolve(config.vueAppPath, './vue-ssr-server-bundle.json'),
+  serverJson: path.resolve(ssrBuiltPath, './vue-ssr-server-bundle.json'),
   clientJson: path.resolve(config.vueAppPath, './vue-ssr-client-manifest.json'),
   templateHtml: path.resolve(`${srcDir}/templates/index.html`),
 };

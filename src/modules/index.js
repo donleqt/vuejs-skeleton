@@ -33,19 +33,29 @@ function registerAllModules(context) {
   router.beforeEach(async (to, from, next) => {
     const matchedModules = APP_MODULES.filter(e => shouldLoadModule(e, to));
     if (matchedModules.length) {
-      await Promise.all(
-        matchedModules.map(async (currentModule) => {
-          currentModule.loaded = true;
-          const loading = currentModule.module();
-          if (loading.then) {
-            moduleEvent.emit('load', loading);
-          }
-          const ModuleClass = (await loading).default;
-          new ModuleClass(context).register();
-        }),
-      );
-      router.replace(to.fullPath);
-      next();
+      try {
+        await Promise.all(
+          matchedModules.map(async (currentModule) => {
+            const loading = currentModule.module();
+            if (loading.then) {
+              moduleEvent.emit('load', loading);
+            }
+            try {
+              const ModuleClass = (await loading).default;
+              currentModule.loaded = true;
+              new ModuleClass(context).register();
+            } catch (error) {
+              throw error;
+            }
+          }),
+        );
+        router.replace(to.fullPath);
+        next();
+      } catch (error) {
+        console.error(error);
+        next();
+        throw error;
+      }
     } else {
       next();
     }

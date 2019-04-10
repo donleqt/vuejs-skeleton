@@ -26,9 +26,11 @@ export function injectAsync(asyncFunc, asyncKey) {
         if (global.isServer) {
           this.$asyncData = this.$router.asyncData;
         }
-
         if (this.$asyncData && this.$asyncData[cacheId]) {
           this.async.data = this.$asyncData[cacheId];
+          if (this.onAsyncResolved) {
+            this.onAsyncResolved(this.async.data);
+          }
           if (global.isClient) {
             delete this.$asyncData[cacheId];
           }
@@ -38,6 +40,9 @@ export function injectAsync(asyncFunc, asyncKey) {
             const resp = await asyncFunc.call(this);
             this.async.loading = false;
             this.async.data = resp;
+            if (resp && this.onAsyncResolved) {
+              this.onAsyncResolved(resp);
+            }
           } catch (error) {
             console.error(error);
             this.async.error = error;
@@ -45,6 +50,10 @@ export function injectAsync(asyncFunc, asyncKey) {
         }
       };
       this.loadAsync();
+    },
+    methods: {
+      onAsyncResolved() {
+      },
     },
   };
 }

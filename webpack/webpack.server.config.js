@@ -5,6 +5,7 @@ const baseConfig = require('@vue/cli-service/webpack.config.js');
 /* eslint-enable */
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 const commonConfig = require('./webpack.common.config');
+const config = require('../config');
 
 baseConfig.plugins = baseConfig.plugins.filter((e, idz) => idz !== 4);
 baseConfig.optimization = {};
@@ -44,6 +45,7 @@ module.exports = merge(baseConfig, {
   // This tells the server bundle to use Node-style exports
   output: {
     libraryTarget: 'commonjs2',
+    path: `${config.projectRoot}/${(config.build.outputSSR || config.build.outputDir)}`,
   },
 
   // https://webpack.js.org/configuration/externals/#function
@@ -61,6 +63,4 @@ module.exports = merge(baseConfig, {
   // into a single JSON file. The default file name will be
   // `vue-ssr-server-bundle.json`
   plugins: [new VueSSRServerPlugin(), ...commonConfig.plugins],
-
-  watch: false,
 });

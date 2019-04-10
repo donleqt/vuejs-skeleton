@@ -2,6 +2,8 @@
 node_modules
 /dist
 /dist-*
+/debug
+/debug-*
 
 # local env files
 .env.local
