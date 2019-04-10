@@ -1,4 +1,7 @@
 export default function withReload(component) {
+  if (global.isServer) {
+    return component;
+  }
   return {
     data() {
       return {
