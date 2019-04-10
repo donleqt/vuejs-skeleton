@@ -54,13 +54,12 @@ const locationHelper = {
         if (pattern) {
           const regex = new RegExp(pattern);
           if (!regex.test(value)) {
-            throw new Error(`:${name} (${value}) doesn't match Regex: ${pattern}`);
+            console.error(`:${name} (${value}) doesn't match Regex: ${pattern}`);
           }
         }
         routePath = routePath.replace(e, value);
       } else {
-        const mess = `:${name} required`;
-        throw new Error(mess);
+        console.error(`:${name} required`);
       }
     });
     return routePath;

@@ -62,13 +62,13 @@
 }
 
 @mixin mobile-to-tablet() {
-  @include breakpoint($max: 1999px) {
+  @include breakpoint($max: 1199px) {
     @content;
   }
 }
 
 @mixin tablet() {
-  @include breakpoint($min: 768px, $max: 1999px) {
+  @include breakpoint($min: 768px, $max: 1199px) {
     @content;
   }
 }

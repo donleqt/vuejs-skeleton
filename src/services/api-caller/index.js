@@ -147,10 +147,15 @@ export class ApiCaller {
 
   static generateUrl(opt) {
     return `?${Object.entries(opt.query)
-      .filter(arr => arr[0] !== undefined && arr[1] !== undefined)
-      .map((arr) => {
-        const v2 = Array.isArray(arr[1]) ? `[${arr[1].join(',')}]` : arr[1].toString();
-        return `${arr[0].toString()}=${encodeURIComponent(v2)}`;
+      .filter(([key, value]) => key !== undefined && value !== undefined)
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          const str = value.map((e) => {
+            return `${key.toString()}=${encodeURIComponent(e.toString())}`;
+          });
+          return str.join('&');
+        }
+        return `${key.toString()}=${encodeURIComponent(value.toString())}`;
       })
       .join('&')}`;
   }
