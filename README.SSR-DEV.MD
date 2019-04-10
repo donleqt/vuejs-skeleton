@@ -60,7 +60,7 @@ $ yarn build --no-ssr
 
 # Handle Errors
 The following are some popular errors and fixing solution when running our app in SSR mode.
-* window/document is not undefined:
+* window/document is undefined:
   - How to resolve: Use global.isServer to check current mode, then skip the code blocks which includes window/document if needed.
 * errors are thrown from non compatible library: 
   - How to resolve: Use safe-import to resolve, `./src/helpers/vue/safe-import.js`
