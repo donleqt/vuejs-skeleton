@@ -1,32 +1,11 @@
 const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
-/* eslint-disable */
-const baseConfig = require('@vue/cli-service/webpack.config.js');
-/* eslint-enable */
+const vueWebpackConfig = require('./get-vue-cli-config')();
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 const commonConfig = require('./webpack.common.config');
 const config = require('../config');
 
-baseConfig.plugins = baseConfig.plugins.filter((e, idz) => idz !== 4);
-baseConfig.optimization = {};
-
-// disable mini extract
-baseConfig.module.rules.forEach((r) => {
-  const list = r.oneOf || r.use;
-  if (list) {
-    return list.forEach(
-      e =>
-        e.use &&
-        e.use.forEach((e) => {
-          if (e.loader.includes('css-extract')) {
-            e.loader = 'null-loader';
-          }
-        }),
-    );
-  }
-});
-
-module.exports = merge(baseConfig, {
+module.exports = merge(vueWebpackConfig, {
   ...commonConfig,
   // Point entry to your app's server entry file
   entry: `${__dirname}/../src/server/entry-server.js`,

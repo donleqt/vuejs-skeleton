@@ -29,7 +29,7 @@ Optimized options for ssr-development is the following:
     "logLevel": "debug"
   },
   "build": {
-    "mode": "production",
+    "mode": "development",
     "analyse": false,
     "skipSSR": false,
     "watchSSR": true,
@@ -39,8 +39,9 @@ Optimized options for ssr-development is the following:
   ...
 }
 ```
-If the error logs are not clear enough please adjust buid.mode to "development". However, in this mode
-Vue will warning about "hydrate" mismatch. It's ok to skip that warning.
+In build.mode = "development"
+Vue will warning about "hydrate" mismatch. You need to follow the warning log and try to correct them for 
+performance on production build.
 
 # Start Development
 Please follow all the steps, including the order of commands.
@@ -48,14 +49,10 @@ Please follow all the steps, including the order of commands.
 ```
 $ yarn build
 ```
+By using watchSSR = "true" in the config file, this command will hot reload
 * Start Nodejs server:
 ```
 $ yarn server
-```
-* Rebuild client side files and bundle every time you changed the code by
-executing this command:
-```
-$ yarn build --no-ssr
 ```
 
 # Handle Errors
