@@ -7,15 +7,15 @@ function logRequest(req, data) {
     headers: req.headers,
     url: req.originalUrl,
     method: req.method,
+  });
+  logger.debug('SSR middleware: ');
+  logger.debug('', {
+    render: `=====> ${data.render} <=====`,
     timeVN: moment
       .utc()
       .utcOffset(7)
       .format('DD-MM-YYYY HH:mm:ss'),
-  });
-  logger.debug('SSR middleware: ');
-  logger.debug('', {
     ...data,
-    render: `=====> ${data.render} <=====`,
     url: req.originalUrl,
   });
 }
@@ -27,8 +27,8 @@ function createRequestLogger(req) {
   };
 
   const log = (data) => {
-    logData.duration = Date.now() - logData.begin;
-    logRequest(req, { ...logData, ...data });
+    data.duration = Date.now() - logData.begin;
+    logRequest(req, { ...data });
   };
 
   return {

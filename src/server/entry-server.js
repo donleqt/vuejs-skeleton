@@ -11,14 +11,14 @@ export default function createApp(context) {
   return new Promise(async (resolve, reject) => {
     const { app, router, store } = baseCreateApp();
     const { logger } = context;
-
+    const logInfo = {};
     router.beforeEach(async (to, from, next) => {
       await app.bootstrap();
       next();
     });
 
     if (isUseSSR(context)) {
-      logger.log({ render: 'Server - No Cached' });
+      logInfo.render = 'Server Side- No Cached';
       router.asyncData = {};
       router.beforeEach(async (to, from, next) => {
         const matchedComponents = router.getMatchedComponents(to);
@@ -36,7 +36,7 @@ export default function createApp(context) {
           .catch(reject);
       });
     } else {
-      logger.log({ render: 'Client - No Cached' });
+      logInfo.render = 'Client Side - No Cached';
     }
 
     router.onReady(async () => {
@@ -46,6 +46,7 @@ export default function createApp(context) {
       context.state = store.state;
       context.meta = app.$meta(); // pass vue-meta
       context.router = router; // pass router to outside
+      logger.log(logInfo);
       resolve(app);
     }, reject);
 
