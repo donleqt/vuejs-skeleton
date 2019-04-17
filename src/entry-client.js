@@ -19,13 +19,8 @@ if (!document.querySelector('#app')) {
   document.body.append(div);
 }
 
-router.beforeEach(async (to, from, next) => {
-  // if the app has not bootstraped yet
-  await bootstrap();
-  next();
-});
-
 // on router ready, mount the app
 router.onReady(async () => {
+  await bootstrap();
   app.$mount('#app');
 });
