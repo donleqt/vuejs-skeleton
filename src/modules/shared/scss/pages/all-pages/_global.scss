@@ -5,6 +5,7 @@ body {
   background-color: #fff;
   letter-spacing: 0.02em;
   margin: 0;
+  font-size: 1.4rem;
 }
 
 .nanobar {
@@ -69,4 +70,27 @@ body {
 .border-light {
   $color: #fff;
   border: 1px solid rgba($color, 0.1);
+}
+
+.y-margin {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.x-margin {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.t-margin {
+  margin-top: 2rem;
+}
+
+.b-margin {
+  margin-bottom: 2rem;
+}
+
+.sp {
+  height: 1px;
+  border-top: 1px solid rgba($color-text, 0.1);
 }

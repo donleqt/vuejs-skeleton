@@ -11,6 +11,7 @@ Vue.config.productionTip = false;
 Object.assign(Vue.prototype, {
   console,
   $icons: icons,
+  jsv: 'javascript:void(0)',
   $viewport: checkViewport(),
 });
 

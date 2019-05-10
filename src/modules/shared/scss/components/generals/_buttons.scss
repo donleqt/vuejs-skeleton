@@ -2,5 +2,11 @@ button {
   cursor: pointer;
   background: $color-main;
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  line-height: 1.4;
+
+  &:hover {
+    background: darken($color-main, 10);
+  }
 }
