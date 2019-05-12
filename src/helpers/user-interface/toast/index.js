@@ -6,9 +6,9 @@ const defaultOptions = {
   debug: false,
   positionClass: 'toast-bottom-right',
   onclick: null,
-  showDuration: 300,
-  hideDuration: 500,
-  timeOut: 10000,
+  showDuration: 100,
+  hideDuration: 100,
+  timeOut: 5000,
   extendedTimeOut: 3000,
   showEasing: 'swing',
   hideEasing: 'linear',
@@ -41,16 +41,11 @@ const toast = {
 
 const lazyToast = new Proxy(toast, {
   get(target, name) {
-    return async (params) => {
+    return async (...params) => {
       await importToastr();
-      return target[name].apply(null, [params]);
+      return target[name].apply(null, params);
     };
   },
 });
-
-global.demoToast = function demoToast() {
-  const message = 'Please check the confirmed result!';
-  ['success', 'info', 'error', 'warning'].forEach(e => lazyToast[e](`${e.toCapitalize()}! ${message}`));
-};
 
 export default lazyToast;
