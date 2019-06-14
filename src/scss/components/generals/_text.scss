@@ -1,4 +1,4 @@
-@import '../../base/base.scss';
+@import '../../base/base';
 
 html {
   font-size: 62.5% * 0.98;
@@ -15,17 +15,4 @@ ul {
   margin: 1rem 0;
   padding: 0;
   list-style: none;
-}
-
-.title-1 {
-  font-size: 2.6rem;
-}
-
-.title-2 {
-  font-size: 1.8rem;
-  margin: 1rem;
-}
-
-.lighter {
-  font-weight: 300;
 }
