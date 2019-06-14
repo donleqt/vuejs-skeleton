@@ -12,7 +12,7 @@ import GlobalWrapper from '@/modules/shared/wrappers/GlobalWrapper';
 
 export default {
   metaInfo: {
-    titleTemplate: 'Vue - %s',
+    titleTemplate: 'SIA - %s',
   },
   components: {
     GlobalWrapper,

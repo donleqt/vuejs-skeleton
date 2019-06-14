@@ -1,18 +1,5 @@
 @import '../../base/base';
 
 html {
-  font-size: 62.5% * 0.98;
-}
-
-$headers: 'h1, h2, h3, h4, h5, h6';
-
-#{$headers} {
-  font-weight:300;
-  margin-bottom: 2rem;
-}
-
-ul {
-  margin: 1rem 0;
-  padding: 0;
-  list-style: none;
+  font-size: 62.5%;
 }

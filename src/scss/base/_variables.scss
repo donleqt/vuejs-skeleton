@@ -1,5 +1,5 @@
-// custome bootstrap
-$grid-gutter-width: 20px;
+// Bootstrap settings
+$font-size-base: 1.6rem;
 
 // ==========================================================================
 // Colors
@@ -26,16 +26,3 @@ $z-index-toast: 1100;
 
 // End theme color
 // ==========================================================================
-
-// ==========================================================================
-// Breakpoints
-// used by the mixin 
-// @inlcude breakpoint($mobile-to-tablet) {}
-// @inlcude breakpoint($desktop) {}
-// @inlcude breakpoint($tablet) {} less used, only fix for tablet devices
-// ==========================================================================
-$mobile-to-tablet: 'lg';
-$mobile: 'sm';
-$tabletUp: 'md-up';
-$tablet: 'tablet';
-$desktop: 'hlg-up';

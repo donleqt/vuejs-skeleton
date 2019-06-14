@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueLazyLoad from 'vue-lazyload';
 import Meta from 'vue-meta';
+import BootstrapVue from 'bootstrap-vue';
 import toast from '@/helpers/user-interface/toast';
 
 import icons from './common/icons';
@@ -37,3 +38,5 @@ Vue.use(VueLazyLoad, {
     threshold: 0.6,
   },
 });
+
+Vue.use(BootstrapVue);
