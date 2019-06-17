@@ -37,7 +37,7 @@ module.exports = {
     "arrow-body-style": "off",
     "no-restricted-globals": "off",
     "no-underscore-dangle": "off",
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
   },
   parserOptions: {
     parser: "babel-eslint",
