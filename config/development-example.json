@@ -12,7 +12,7 @@
   "build": {
     "mode": "production",
     "analyse": false,
-    "skipSSR": false,
+    "skipSSR": true,
     "watchSSR": false,
     "outputDir": "dist",
     "outputSSR": "dist-ssr"
