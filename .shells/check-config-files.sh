@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-envDefaults=("production" "development" "server-debug")
+envDefaults=("production" "development")
 
 echo -e "\033[32mCheck config files...\033[0m";
 for env in "${envDefaults[@]}"
