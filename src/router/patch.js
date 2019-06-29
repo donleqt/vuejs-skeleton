@@ -3,7 +3,7 @@ import utils from '@/helpers/utils';
 
 function fixHref(router) {
   if (global.isClient) {
-    $(document).on('click', 'a', (event) => {
+    $(document).on('click', 'a.ilink', (event) => {
       const url = event.currentTarget.href;
       if (!utils.isExternalLink(url, location.href)) {
         event.preventDefault();

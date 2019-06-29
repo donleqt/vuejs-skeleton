@@ -27,7 +27,7 @@ import globalStore from '@/store/global';
 export default {
   name: 'GlobalWrapper',
   useStores: {
-    global: globalStore,
+    globalStore,
   },
   data() {
     return {
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     websiteConfig() {
-      return this.stores.global.getters.selectWebsiteConfig();
+      return this.$globalStore.getters.selectWebsiteConfig();
     },
     isReady() {
       return true || this.websiteConfig.data;

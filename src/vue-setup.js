@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueLazyLoad from 'vue-lazyload';
 import Meta from 'vue-meta';
+import toast from '@/helpers/user-interface/toast';
 
 import icons from './common/icons';
 import { checkViewport } from './common/display';
@@ -10,9 +11,10 @@ Vue.config.productionTip = false;
 // inject vm data
 Object.assign(Vue.prototype, {
   console,
-  $icons: icons,
   jsv: 'javascript:void(0)',
+  $icons: icons,
   $viewport: checkViewport(),
+  $toast: toast,
 });
 
 // install core libraries
