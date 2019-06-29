@@ -7,7 +7,7 @@ export default {
   },
   computed: {
     webConfig() {
-      return this.$globalStore.getters.selectWebsiteConfig().data || {};
+      return this.$globalStore.getters.selectWebsiteConfig.data || {};
     },
   },
 };

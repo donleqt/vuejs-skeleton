@@ -19,7 +19,7 @@ export default {
 
 
 <style lang="scss">
-  @import "../../scss/base/base";
+  @import "~@/scss/base/base.scss";
   .loading-wrapper {
     padding: 0.1px;
     $this: &;

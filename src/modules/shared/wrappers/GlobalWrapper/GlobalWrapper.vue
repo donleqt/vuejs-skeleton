@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     websiteConfig() {
-      return this.$globalStore.getters.selectWebsiteConfig();
+      return this.$globalStore.getters.selectWebsiteConfig;
     },
     isReady() {
       return true || this.websiteConfig.data;
