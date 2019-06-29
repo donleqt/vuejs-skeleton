@@ -2,7 +2,7 @@
   .app-wrapper
     slot
 </template>
-<style lang="scss" src="@/modules/shared/scss/style.scss"></style>
+<style lang="scss" src="@/scss/style.scss"></style>
 <script>
 import globalStore from '@/store/global';
 

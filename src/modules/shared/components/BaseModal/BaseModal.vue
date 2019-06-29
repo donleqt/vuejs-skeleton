@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../../scss/base/_base.scss";
+  @import "~@/scss/base/_base.scss";
 
   $animate-time: 0.2s;
 

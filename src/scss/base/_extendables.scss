@@ -61,12 +61,6 @@
   }
 }
 
-@mixin mobile-to-tablet() {
-  @include breakpoint($max: 1199px) {
-    @content;
-  }
-}
-
 @mixin tablet() {
   @include breakpoint($min: 768px, $max: 1199px) {
     @content;
@@ -79,8 +73,20 @@
   }
 }
 
+@mixin tablet-down() {
+  @include breakpoint($max: 1199px) {
+    @content;
+  }
+}
+
 @mixin desktop() {
   @include breakpoint($min: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktop-large() {
+  @include breakpoint($min: 1440px) {
     @content;
   }
 }
@@ -90,3 +96,10 @@
     @content;
   }
 }
+
+@mixin ratio-frame($ratio) {
+  position: relative;
+  height: 0;
+  padding-bottom: 100% / $ratio;
+}
+

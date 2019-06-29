@@ -2,7 +2,7 @@
 <div id="toast-container" class="toast-bottom-right"><div class="toast toast-info" aria-live="polite" style=""><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">Info message</div><div class="toast-message">kskksks</div></div></div>
 */
 
-@import '~@/modules/shared/scss/base/base';
+@import '~@/scss/base/base';
 
 @mixin deep() {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
