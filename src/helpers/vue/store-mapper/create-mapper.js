@@ -20,9 +20,10 @@ function findState(globalState, paths) {
   return moduleState;
 }
 
-function createStoreMapper(storeModule, $store) {
-  const path = storeModule.path || '';
-  const paths = `${path}/${storeModule.name}`.split('/').filter(e => e !== '');
+function createStoreMapper(storeModule, vm) {
+  const { $store } = vm;
+  const namespace = storeModule.path ? `${storeModule.path}/${storeModule.name}` : storeModule.name;
+  const paths = namespace.split('/');
 
   // register module store if not registed
   if (!$store.hasModule(paths)) {
@@ -31,28 +32,30 @@ function createStoreMapper(storeModule, $store) {
     });
   }
 
-  const mapperActions = {};
-  if (storeModule.actions) {
-    map(storeModule.actions, (value, key) => (mapperActions[key] = key));
-  }
-
-  const mapperGetters = {};
-  if (storeModule.getters) {
-    map(storeModule.getters, (value, key) => {
-      mapperGetters[key] = function mapGetter() {
-        const { state } = this.$store;
-        return storeModule.getters[key](findState(state, paths), mapperGetters, state);
-      };
-    });
-  }
+  // process state
   const mapper = {
-    actions: mapActions(path ? `${path}/${storeModule.name}` : storeModule.name, mapperActions),
-    getters: mapperGetters,
-    state() {
-      return findState(this.$store.state, paths);
+    actions: {},
+    getters: {},
+    get state() {
+      return findState(vm.$store.state, paths);
     },
   };
 
+  // process actions
+  if (storeModule.actions) {
+    const actionsNames = {};
+    map(storeModule.actions, (value, name) => (actionsNames[name] = name));
+    mapper.actions = mapActions(storeModule.path ? namespace : storeModule.name, actionsNames);
+    map(mapper.actions, (val, key) => mapper.actions[key] = val.bind(vm));
+  }
+
+  if (storeModule.getters) {
+    mapper.getters = new Proxy(storeModule.getters, {
+      get(target, key) {
+        return vm.$store.getters[`${namespace}/${key}`];
+      },
+    });
+  }
   return mapper;
 }
 
