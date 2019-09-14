@@ -1,4 +1,4 @@
-import createObserver from '../helpers/javascript/observer';
+import createObserver from '../../helpers/javascript/observer';
 
 const moduleEvent = createObserver();
 

@@ -1,10 +1,10 @@
 import { flatRoutes } from '@/helpers/vue/route-helper';
 import { removeFromArray } from '@/helpers/utils';
 
-export default class AbstractVueModule {
+export default class AbstractAppModule {
   routes = {};
   basePath = '';
-  wrapper = {};
+  wrapper = null;
 
   constructor(context) {
     this.$context = context;
