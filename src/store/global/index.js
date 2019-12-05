@@ -4,17 +4,17 @@ import mutations from './mutations';
 import * as getters from './getters';
 
 const initState = () => ({
-    menus: createSampleListing(),
-    websiteConfig: createSampleResource(),
+  menus: createSampleListing(),
+  websiteConfig: createSampleResource(),
 });
 
 const global = {
-    name: 'global',
-    namespaced: true,
-    state: initState,
-    getters,
-    mutations,
-    actions,
+  name: 'global',
+  namespaced: true,
+  state: initState,
+  getters,
+  mutations,
+  actions,
 };
 
 export default global;
