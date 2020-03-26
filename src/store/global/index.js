@@ -1,12 +1,6 @@
-import { createSampleListing, createSampleResource } from '@/helpers/samples';
 import actions from './actions';
-import mutations from './mutations';
+import mutations, { initState } from './mutations';
 import * as getters from './getters';
-
-const initState = () => ({
-  menus: createSampleListing(),
-  websiteConfig: createSampleResource(),
-});
 
 const global = {
   name: 'global',

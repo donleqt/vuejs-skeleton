@@ -9,6 +9,7 @@ function startServer() {
   const app = express();
   const server = http.createServer(app);
   app.use(express.static(config.vueAppPath));
+  app.use(express.static(`${config.projectRoot}/public`));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: false,

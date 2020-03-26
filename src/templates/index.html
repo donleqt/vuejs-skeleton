@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html {{{ meta.inject().htmlAttrs.text() }}}>
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="dc.language" content="{{{$i18n.locale}}}" />
   <!-- use triple mustache for non-HTML-escaped interpolation -->
    <!--[ssr]
     {{{ meta.inject().title.text() }}}
@@ -20,6 +21,10 @@
     <strong>We're sorry but this website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
   </noscript>
   <!--vue-ssr-outlet-->
-  <!--[ssr]<script>window.__ASYNC_DATA__ = {{{ JSON.stringify(asyncData) }}};</script>[ssr]-->
+  <!--[ssr]
+      <script>window.__ASYNC_DATA__ = {{{ JSON.stringify(asyncData) }}};</script>
+      <script>window.__SERVER_DATA__ = {{{ JSON.stringify(serverData) }}};</script>
+    [ssr]-->
+
 </body>
 </html>

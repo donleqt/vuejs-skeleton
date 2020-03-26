@@ -3,7 +3,7 @@ import VueLazyLoad from 'vue-lazyload';
 import Meta from 'vue-meta';
 import BootstrapVue from 'bootstrap-vue';
 import toast from '@/helpers/user-interface/toast';
-
+import { getLocaleLink } from './i18n/index';
 import icons from './common/icons';
 import { checkViewport } from './common/display';
 
@@ -16,12 +16,14 @@ Object.assign(Vue.prototype, {
   $icons: icons,
   $viewport: checkViewport(),
   $toast: toast,
+  $l: getLocaleLink,
 });
 
 // install core libraries
 // ==== VUE-META
-Vue.use(Meta);
-
+Vue.use(Meta, {
+  refreshOnceOnNavigation: true,
+});
 // ==== VUE LAZY-LOAD
 const placeholder = require('@/assets/images/1px.png');
 

@@ -14,22 +14,26 @@ function findAsyncData(component) {
   return null;
 }
 
+const loadComponents = async (component, asyncPromises, ssrContext) => {
+  if (typeof component === 'function') {
+    component = await component().then(c => c.default);
+  }
+  const asyncData = findAsyncData(component);
+  if (asyncData) {
+    const exec = asyncData.apply(ssrContext);
+    exec.then(data => injectAsyncDataSSR(component, data, ssrContext));
+    asyncPromises.push(exec);
+  }
+  if (component.components) {
+    await Promise.all(objectMap(component.components, loadComponents));
+  }
+  return true;
+};
+
 export function loadAllComponentsAsync(components, ssrContext) {
   const asyncPromises = [];
-  const loadComponents = async (component) => {
-    if (typeof component === 'function') {
-      component = await component().then(c => c.default);
-    }
-    const asyncData = findAsyncData(component);
-    if (asyncData) {
-      const exec = asyncData.apply(ssrContext);
-      exec.then(data => injectAsyncDataSSR(component, data, ssrContext));
-      asyncPromises.push(exec);
-    }
-    if (component.components) {
-      await Promise.all(objectMap(component.components, loadComponents));
-    }
-    return true;
-  };
-  return Promise.all(components.map(e => loadComponents(e))).then(() => asyncPromises);
+
+  return Promise.all(components.map(e => loadComponents(e, asyncPromises, ssrContext))).then(() => {
+    return asyncPromises;
+  });
 }

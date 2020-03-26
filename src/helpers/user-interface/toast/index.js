@@ -42,8 +42,11 @@ const toast = {
 const lazyToast = new Proxy(toast, {
   get(target, name) {
     return async (...params) => {
-      await importToastr();
-      return target[name].apply(null, params);
+      if (global.isClient) {
+        await importToastr();
+        return target[name].apply(null, params);
+      }
+      return true;
     };
   },
 });

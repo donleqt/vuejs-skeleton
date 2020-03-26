@@ -1,0 +1,45 @@
+.cookie-message {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #353a43;
+  color: #fff;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    justify-content: center;
+  }
+
+  button {
+    margin-left: 15px;
+    background-color: #f3f3f3;
+    color: #000;
+    min-width: 80px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color: #f3f3f3, $amount: 10);
+    }
+  }
+
+  a {
+    display: inline;
+    color: inherit !important;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    button {
+      font-size: 1.3rem;
+      min-width: 80px;
+    }
+  }
+}

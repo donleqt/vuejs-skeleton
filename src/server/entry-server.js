@@ -9,20 +9,23 @@ export default function createApp(context) {
   // we will be returning a Promise so that the server can wait until
   // everything is ready before rendering.
   return new Promise(async (resolve, reject) => {
-    const { app, router, store } = baseCreateApp();
-    const { logger } = context;
+    const { app, router, store } = baseCreateApp(context);
     const logInfo = {};
     router.beforeEach(async (to, from, next) => {
-      await app.bootstrap();
-      next();
+      try {
+        await app.bootstrap();
+        next();
+      } catch (error) {
+        reject(error);
+      }
     });
 
     if (isUseSSR(context)) {
-      logInfo.render = 'Server Side- No Cached';
       router.asyncData = {};
       router.beforeEach(async (to, from, next) => {
         const matchedComponents = router.getMatchedComponents(to);
         const ssrContext = {
+          req: context.req,
           $store: store,
           $router: router,
           $route: to,
@@ -40,17 +43,28 @@ export default function createApp(context) {
     }
 
     router.onReady(async () => {
-      // after beforehook resolve
+      try {
+        // after beforehook resolve
       // serialized and injected into the HTML as `window.__INITIAL_STATE__`.
-      context.asyncData = router.asyncData;
-      context.state = store.state;
-      context.meta = app.$meta(); // pass vue-meta
-      context.router = router; // pass router to outside
-      logger.log(logInfo);
-      resolve(app);
+        context.asyncData = router.asyncData;
+        context.state = store.state;
+        context.webConfig = store.state.global.websiteConfig.data;
+        context.meta = app.$meta(); // pass vue-meta
+        context.$i18n = app.$i18n;
+        context.router = router; // pass router to outside
+        // Data send to client side
+        context.serverData = {
+          languages: {
+            [app.$i18n.locale]: app.$i18n.getLocaleMessage(app.$i18n.locale),
+          },
+        };
+        resolve(app);
+      } catch (error) {
+        reject(error);
+      }
     }, reject);
 
     // set server-side router's location
-    router.push(context.url);
+    router.push({ path: context.url });
   });
 }

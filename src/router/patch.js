@@ -1,3 +1,4 @@
+import BlankLayout from '@/modules/shared/layouts/BlankLayout';
 import NotFound from '@/modules/shared/views/NotFound';
 import utils from '@/helpers/utils';
 
@@ -19,11 +20,20 @@ export default function patchRouter(router) {
     const { meta } = router.currentRoute;
     router.code = code;
     if ([404, 500].includes(code)) {
-      meta.wrapper = NotFound;
+      meta.wrapper = {
+        render(h) {
+          return <BlankLayout><NotFound></NotFound></BlankLayout>;
+        },
+      };
 
       if (error) {
+        try {
+          router.app.$store.dispatch('global/loadPageFail', error);
+        } catch (error) {
+        }
         console.error(error);
       }
+
 
       if (global.isClient) {
         if (router.app.$children[0] && router.app.$children[0].$forceUpdate) {

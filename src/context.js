@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { CommonApiService } from '@/services/api/common';
 import { ApiCaller } from './services/api-caller/index';
+import bootstrapLocale from './i18n/bootstrap-locale';
 
 // create a fresh context for the app
 // including api caller and services
@@ -35,11 +36,15 @@ export function contextBootstrap(context) {
       Vue.mixin({
         beforeCreate() {
           this.$context = this.$root.$context;
+          this.$webConfig = context.store.getters['global/selectWebsiteConfig'].data;
         },
       });
     }
 
     // do other bootstrap
-    await context.store.bootstrap();
+    await Promise.all([
+      bootstrapLocale(context),
+      context.store.bootstrap(),
+    ]);
   };
 }

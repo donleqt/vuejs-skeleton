@@ -28,9 +28,12 @@ export default function createStore() {
     actions: {},
   });
 
+  // Add custom data
+  store.modules = {};
+
   store.bootstrap = () => {
     if (!store.state.global.websiteConfig.data) {
-      return store.dispatch('global/getWebsiteConfig').catch(console.error);
+      return store.dispatch('global/getWebsiteConfig');
     }
     return Promise.resolve(true);
   };

@@ -10,6 +10,7 @@ const cacher = new LRU({
 });
 
 const isUseCache = req => nodeServer.useCachePage;
+const renderer = createRenderer();
 
 function ssrMiddleware(req, res) {
   const isCachable = isUseCache(req);
@@ -25,11 +26,11 @@ function ssrMiddleware(req, res) {
     const hit = cacher.has(cacheKey) && cacher.get(cacheKey);
     if (hit) {
       logger.log({ render: 'HTML Cached' });
-      return res.end(hit);
+      return res.send(hit);
     }
   }
 
-  createRenderer()
+  renderer
     .renderToString(context)
     .then(html => {
       const { router } = context;
@@ -38,14 +39,22 @@ function ssrMiddleware(req, res) {
         res.redirect(code, router.redirectPath);
       } else {
         res.status(code);
-        res.end(html);
+        res.send(html);
       }
       if (isCachable && code === 200) {
         cacher.set(cacheKey, html);
       }
+      logger.log({ 
+        render: 'Server Side- No Cached'
+      });
     })
     .catch(err => {
-      res.json(err);
+      res
+      .status(500)
+      .json({
+        error: true,
+        message: err.message
+      });
       console.error(err);
     });
 }

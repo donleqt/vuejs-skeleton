@@ -24,7 +24,7 @@ export default {
   methods: {
     removeClass() {
       if (this.attachedClass) {
-        this.attachedClass.split(' ').forEach((e) => {
+        this.attachedClass.split(' ').filter(e => e).forEach((e) => {
           document.body.classList.remove(e);
         });
       }
@@ -33,7 +33,7 @@ export default {
       this.removeClass();
       if (typeof this.className === 'string') {
         this.attachedClass = this.className;
-        this.attachedClass.split(' ').forEach(e => document.body.classList.add(e));
+        this.attachedClass.split(' ').filter(e => e).forEach(e => e && document.body.classList.add(e));
       }
     },
   },

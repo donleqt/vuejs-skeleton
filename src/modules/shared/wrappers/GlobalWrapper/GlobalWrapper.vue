@@ -29,6 +29,13 @@ export default {
   useStores: {
     globalStore,
   },
+  metaInfo() {
+    return {
+      htmlAttrs: {
+        lang: 'en',
+      },
+    };
+  },
   data() {
     return {
       loading: false,

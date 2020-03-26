@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
-import i18n from './i18n';
+import { createI18n } from './i18n';
 import './js/plugins';
 import './vue-setup';
 
@@ -11,10 +11,13 @@ import registerAllModules from './modules/index';
 import { createContext, contextBootstrap } from './context';
 
 // export a factory function for creating fresh app, router and store
-export default function createApp() {
+export default function createApp(serverContext) {
   const store = createStore();
   const router = createRouter();
   const context = createContext();
+
+  // Store expressjs context
+  context.serverContext = serverContext;
 
   // add store and router to the context
   // so far in the code, we can easily access store and router from the context
@@ -29,7 +32,7 @@ export default function createApp() {
   sync(store, router);
 
   const app = (context.app = new Vue({
-    i18n,
+    i18n: createI18n(),
     router,
     store,
     render: h => h(App),

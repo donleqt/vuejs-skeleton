@@ -5,7 +5,7 @@ if (global.isClient) {
   Vue.prototype.$asyncData = window.__ASYNC_DATA__;
 }
 
-export function injectAsync(asyncFunc, asyncKey) {
+export default function injectAsync(asyncFunc, asyncKey) {
   return {
     asyncKey,
     asyncData: asyncFunc, // inject for ssr
@@ -15,12 +15,14 @@ export function injectAsync(asyncFunc, asyncKey) {
       };
     },
     beforeCreate() {
-      const cacheId = asyncKey || this.$options.name;
       this.async = {
         data: null,
         error: false,
         loading: false,
       };
+    },
+    created() {
+      const cacheId = asyncKey || this.$options.name;
 
       this.loadAsync = async () => {
         if (global.isServer) {

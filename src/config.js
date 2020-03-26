@@ -7,4 +7,6 @@ if (appConfig.env !== 'production') {
 }
 api.endPoint = global.isClient ? appConfig.api.browserEndPoint : api.nodeEndPoint;
 
+global.appConfig = appConfig;
+
 export default appConfig;
